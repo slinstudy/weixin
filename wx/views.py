@@ -55,8 +55,12 @@ from xml.etree import ElementTree as etree
 @csrf_exempt
 def wx(request):
     if request.method == 'GET':
-        response = HttpResponse(checkSignature(request))
-        return response
+        if request.GET.get('signature', None) is not None:
+            response = HttpResponse(checkSignature(request))
+            return response
+        else:
+            response=HttpResponse("err")
+            return response
     else:
         xmlstr = smart_str(request.body)
         xml = etree.fromstring(xmlstr)
