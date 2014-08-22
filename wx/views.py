@@ -55,12 +55,12 @@ from xml.etree import ElementTree as etree
 @csrf_exempt
 def wx(request):
     if request.method == 'GET':
-        if request.GET.get('signature', None) is not None:
-            response = HttpResponse(checkSignature(request))
-            return response
-        else:
-            response=HttpResponse("err")
-            return response
+#        if request.GET.get('signature', None) is not None:
+         response = HttpResponse(checkSignature(request),content_type="text/plain")
+         return response
+#        else:
+#            response=HttpResponse("err")
+#            return response
     else:
         xmlstr = smart_str(request.body)
         xml = etree.fromstring(xmlstr)
@@ -86,12 +86,13 @@ def checkSignature(request):
     nonce = request.GET.get('nonce', None)
     echostr = request.GET.get('echostr', None)
     #这里的token我放在setting，可以根据自己需求修改
-    token = "wsytsgsl"
+    token = "wsylibsl"
 
     tmplist = [token, timestamp, nonce]
     tmplist.sort()
     tmpstr = "%s%s%s" % tuple(tmplist)
-    tmpstr = hashlib.sha1(tmpstr).hexdigest()
+    #tmpstr = hashlib.sha1(tmpstr).hexdigest()
+    tmpstr = hashlib.sha1(tmpstr.encode('utf8')).hexdigest()
     if tmpstr == signature:
         return echostr
     else:

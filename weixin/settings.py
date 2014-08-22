@@ -24,8 +24,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wx',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,11 +64,11 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -86,14 +87,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-PROJECT_DIR = os.path.dirname(__file__)
+#PROJECT_DIR = os.path.dirname(__file__)
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, "../templates"),
-)
+#TEMPLATE_DIRS = (
+#    os.path.join(PROJECT_DIR, "../templates"),
+#)
 
-STATIC_ROOT = 'staticfiles'
+#STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
